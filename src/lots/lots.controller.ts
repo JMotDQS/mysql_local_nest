@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { LotsService } from './lots.service';
 
 @Controller('lots')
 export class LotsController {
+	constructor(private readonly lotsService: LotsService) {};
 	/*
 		GET /lots
 		GET /lots/:pk_id
@@ -11,7 +13,8 @@ export class LotsController {
 	*/
 	@Get() // /lots
 	findAll() {
-		return [];
+		//return [];
+		return this.lotsService.findAll();
 	}
 
 	@Get('open') // /lots/open
@@ -21,7 +24,8 @@ export class LotsController {
 
 	@Get(':pk_id') // /lots/:pk_id
 	findOne(@Param('pk_id') pk_id: string) {
-		return { pk_id };
+		//return { pk_id };
+		return this.lotsService.findOne(pk_id);
 	}
 
 	@Post() // /lots
