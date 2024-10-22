@@ -29,17 +29,20 @@ export class LotsController {
 	}
 
 	@Post() // /lots
-	create(@Body() lot: {}) {
-		return lot
+	create(@Body() lot: {created_date: string, lot_name: string, lot_address: string, lot_city: string,  fk_g_states_pk_id: string, lot_zip: string, lot_capacity: number, lot_active: string, fk_manufacturers_pk_id: string}) {
+		//return lot
+		return this.lotsService.create(lot);
 	}
 
 	@Patch(':pk_id') // /lots/:pk_id
-	update(@Param('pk_id') pk_id: string, @Body() lotUpdate: {}) {
-		return { pk_id, ...lotUpdate };
+	update(@Param('pk_id') pk_id: string, @Body() lotUpdate: {created_date?: string, lot_name?: string, lot_address?: string, lot_city?: string,  fk_g_states_pk_id?: string, lot_zip?: string, lot_capacity?: number, lot_active?: string, fk_manufacturers_pk_id?: string}) {
+		//return { pk_id, ...lotUpdate };
+		return this.lotsService.update(pk_id, lotUpdate);
 	}
 
 	@Delete(':pk_id') // /lots/:pk_id
 	delete(@Param('pk_id') pk_id: string) {
-		return { pk_id };
+		//return { pk_id };
+		return this.lotsService.delete(pk_id);
 	}
 }

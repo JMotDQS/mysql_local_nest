@@ -516,7 +516,7 @@ export class LotsService {
 
 	delete(pk_id: string) {
 		const removedLot = this.findOne(pk_id);
-		this.lots.filter(lot => lot.pk_id !== pk_id);
+		this.lots = this.lots.filter(lot => lot.pk_id !== pk_id);
 		return removedLot;
 	}
 }
