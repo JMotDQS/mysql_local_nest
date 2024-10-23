@@ -1,4 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { CreateLotDto } from './dto/create-lot.dto';
+import { UpdateLotDto } from './dto/update-lot.dto';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class LotsService {
@@ -491,10 +494,13 @@ export class LotsService {
 
 	findOne(pk_id: string) {
 		const lot = this.lots.find(lot => lot.pk_id === pk_id);
+		if(!lot) {
+			throw new NotFoundException('User not found...');
+		}
 		return lot;
 	}
 
-	create(lot: {created_date: string, lot_name: string, lot_address: string, lot_city: string,  fk_g_states_pk_id: string, lot_zip: string, lot_capacity: number, lot_active: string, fk_manufacturers_pk_id: string}) {
+	create(lot: CreateLotDto) {
 		const lotNewId = '641e1b7761b-' + Math.random();
 		const newLot = {
 			pk_id: lotNewId,
@@ -504,7 +510,7 @@ export class LotsService {
 		return newLot;
 	}
 
-	update(pk_id: string, updatedLot: {created_date?: string, lot_name?: string, lot_address?: string, lot_city?: string,  fk_g_states_pk_id?: string, lot_zip?: string, lot_capacity?: number, lot_active?: string, fk_manufacturers_pk_id?: string}) {
+	update(pk_id: string, updatedLot: UpdateLotDto) {
 		this.lots = this.lots.map(lot => {
 			if(lot.pk_id === pk_id) {
 				return { ...lot, ...updatedLot };

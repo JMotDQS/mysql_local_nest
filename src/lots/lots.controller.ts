@@ -1,5 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, ValidationPipe } from '@nestjs/common';
 import { LotsService } from './lots.service';
+import { CreateLotDto } from './dto/create-lot.dto';
+import { UpdateLotDto } from './dto/update-lot.dto';
 
 @Controller('lots')
 export class LotsController {
@@ -29,13 +31,13 @@ export class LotsController {
 	}
 
 	@Post() // /lots
-	create(@Body() lot: {created_date: string, lot_name: string, lot_address: string, lot_city: string,  fk_g_states_pk_id: string, lot_zip: string, lot_capacity: number, lot_active: string, fk_manufacturers_pk_id: string}) {
+	create(@Body(ValidationPipe) lot: CreateLotDto) {
 		//return lot
 		return this.lotsService.create(lot);
 	}
 
 	@Patch(':pk_id') // /lots/:pk_id
-	update(@Param('pk_id') pk_id: string, @Body() lotUpdate: {created_date?: string, lot_name?: string, lot_address?: string, lot_city?: string,  fk_g_states_pk_id?: string, lot_zip?: string, lot_capacity?: number, lot_active?: string, fk_manufacturers_pk_id?: string}) {
+	update(@Param('pk_id') pk_id: string, @Body(ValidationPipe) lotUpdate: UpdateLotDto) {
 		//return { pk_id, ...lotUpdate };
 		return this.lotsService.update(pk_id, lotUpdate);
 	}
