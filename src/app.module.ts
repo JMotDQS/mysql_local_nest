@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+//import { AppController } from './app.controller';
+//import { AppService } from './app.service';
+import { User } from './Users/user.model';
 
 @Module({
   imports: [
@@ -12,10 +13,10 @@ import { AppService } from './app.service';
       username: 'root',
       password: 'L0rdOfL1ghtn!ng',
       database: 'kms_v2_mysql',
-      models: []
+      models: [User]
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  //controllers: [AppController],
+  //providers: [AppService],
 })
 export class AppModule {}
