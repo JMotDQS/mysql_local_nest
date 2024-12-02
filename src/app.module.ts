@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-//import { AppController } from './app.controller';
-//import { AppService } from './app.service';
 import { User } from './Users/user.model';
 import { UsersModule } from './Users/users.module';
 
@@ -14,10 +12,10 @@ import { UsersModule } from './Users/users.module';
       username: 'root',
       password: 'L0rdOfL1ghtn!ng',
       database: 'kms_v2_mysql',
-      models: [User]
+      models: [User],
+      autoLoadModels: true,
+      synchronize: true,
     }),
   ],
-  //controllers: [AppController],
-  //providers: [AppService],
 })
 export class AppModule {}
