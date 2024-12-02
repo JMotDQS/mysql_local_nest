@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LotsModule } from './lots/lots.module';
-import { g_lots } from './lots/lots.model';
 
 @Module({
   imports: [
@@ -14,9 +12,8 @@ import { g_lots } from './lots/lots.model';
       username: 'root',
       password: 'L0rdOfL1ghtn!ng',
       database: 'kms_v2_mysql',
-      models: [g_lots]
+      models: []
     }),
-    LotsModule
   ],
   controllers: [AppController],
   providers: [AppService],
