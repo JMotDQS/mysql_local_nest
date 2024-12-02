@@ -20,4 +20,9 @@ export class UsersService {
 			},
 		});
 	}
+
+	async remove(pk_id: string): Promise<void> {
+		const user = await this.findOne(pk_id);
+		await user.destroy();
+	}
 }
